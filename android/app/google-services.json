@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "337554272426",
+    "firebase_url": "https://mwaslat-masr-default-rtdb.firebaseio.com",
+    "project_id": "mwaslat-masr",
+    "storage_bucket": "mwaslat-masr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337554272426:android:a998d22350f3af556520d3",
+        "android_client_info": {
+          "package_name": "com.elemamdev.mwaslat.masr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337554272426-u3oi0tk03bm7f1ks9kl70h6eiat63ke4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQJfk03ru2q_cDbZjUQLHH7Prhk12WFkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337554272426-h03bmufuhgdau1su7e64dv34edp36j73.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "337554272426-1ea7raujbp5fngb3as3vn8hs2lbmh46f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elemamdev.mwaslat.masr.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337554272426:android:c1d567a085674fe96520d3",
+        "android_client_info": {
+          "package_name": "com.elemamdev.mwaslat.masr.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337554272426-u3oi0tk03bm7f1ks9kl70h6eiat63ke4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQJfk03ru2q_cDbZjUQLHH7Prhk12WFkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337554272426-h03bmufuhgdau1su7e64dv34edp36j73.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "337554272426-1ea7raujbp5fngb3as3vn8hs2lbmh46f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elemamdev.mwaslat.masr.driver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
