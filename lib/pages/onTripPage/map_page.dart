@@ -102,6 +102,8 @@ class _MapsState extends State<Maps>
   dynamic offlinebikeicon;
   dynamic onlinebikeicon;
 
+ 
+
   final _mapMarkerSC = StreamController<List<Marker>>();
   StreamSink<List<Marker>> get _mapMarkerSink => _mapMarkerSC.sink;
   Stream<List<Marker>> get mapMarkerStream => _mapMarkerSC.stream;
@@ -608,6 +610,8 @@ class _MapsState extends State<Maps>
                   }
                 } else if (driverReq['is_completed'] == 1 &&
                     driverReq['requestBill'] != null) {
+                  // setState(() {
+                  // });
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushAndRemoveUntil(
                         context,
@@ -3177,6 +3181,7 @@ class _MapsState extends State<Maps>
                                                                                 }
                                                                               } else {
                                                                                 driverOtp = '';
+
                                                                                 var val = await endTrip();
                                                                                 if (val == 'logout') {
                                                                                   navigateLogout();
@@ -3351,6 +3356,8 @@ class _MapsState extends State<Maps>
                                                         //         ),
                                                         //       )
                                                         //     : Container(),
+
+                                                    
                                                         //user cancelled request popup
                                                         (_reqCancelled == true)
                                                             ? Positioned(

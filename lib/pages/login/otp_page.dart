@@ -295,11 +295,10 @@ class _OtpState extends State<Otp> {
                                         _error = '';
                                       });
                                       //Edit to login
-                                      //firebase code send false
+                                      // firebase code send false
                                       // if (phoneAuthCheck != false) {
                                       if (phoneAuthCheck == false) {
                                         var verify = await verifyUser(phnumber);
-
                                         navigate(verify);
                                       } else {
                                         // firebase code send true
