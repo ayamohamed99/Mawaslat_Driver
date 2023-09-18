@@ -432,7 +432,7 @@ class _LoginState extends State<Login> {
                                     //check if otp is true or false
                                     var val = await otpCall();
                                     //otp is true
-                                    if (val.value == true) {
+                                    if (val.value== true) {
                                       phoneAuthCheck = true;
                                       await phoneAuth(countries[phcode]
                                               ['dial_code'] +

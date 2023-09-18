@@ -38,6 +38,7 @@ import 'package:tagyourtaxi_driver/pages/vehicleInformations/vehicle_model.dart'
 import 'package:tagyourtaxi_driver/pages/vehicleInformations/vehicle_number.dart';
 import 'package:tagyourtaxi_driver/pages/vehicleInformations/vehicle_type.dart';
 import 'package:tagyourtaxi_driver/pages/vehicleInformations/vehicle_year.dart';
+import 'package:text_to_speech/text_to_speech.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../pages/NavigatorPages/fleetdocuments.dart';
@@ -354,6 +355,38 @@ getCountryCode() async {
   }
   return result;
 }
+Map<String, dynamic> userRequestData = {};
+
+//stripe pay money
+
+payMoneyStripe(nonce) async {
+  dynamic result;
+  try {
+    var response = await http.post(
+        Uri.parse('${url}api/v1/payment/stripe/make-payment-for-ride'),
+        headers: {
+          'Authorization': 'Bearer ${bearerToken[0].token}',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(
+            {'request_id': userRequestData['id'], 'payment_id': nonce}));
+    if (response.statusCode == 200) {
+      result = 'success';
+    } else if (response.statusCode == 401) {
+      result = 'logout';
+    } else {
+      debugPrint(response.body);
+      result = 'failure';
+    }
+  } catch (e) {
+    if (e is SocketException) {
+      internet = false;
+      result = 'no internet';
+    }
+  }
+  return result;
+}
+
 
 //login firebase
 
@@ -4201,4 +4234,69 @@ enableMyRouteBookings(lat, lng) async {
     }
   }
   return result;
+}
+
+// Speech Function
+TextToSpeech tts = TextToSpeech();
+String defaultLanguage = choosenLanguage == 'ar' ? 'ar' : 'en-US';
+double volume = 1; // Range: 0-1
+double rate = 0.7; // Range: 0-2
+double pitch = 1.0; // Range: 0-2
+String? language;
+String? languageCode;
+// List<String> languagess = <String>[];
+List<String> languageCodes = <String>[];
+String? voice;
+
+Future<void> initLanguages() async {
+  /// populate lang code (i.e. en-US)
+  // setState(() {
+  //   defaultLanguage = choosenLanguage == 'ar' ? 'ar' : 'en-US';
+  // });
+  languageCodes = await tts.getLanguages();
+  print('data is languageCodes $languageCodes');
+
+  /// populate displayed language (i.e. English)
+  final List<String>? displayLanguages = await tts.getDisplayLanguages();
+  if (displayLanguages == null) {
+    return;
+  }
+
+  // languagess.clear();
+  // for (final dynamic lang in displayLanguages) {
+  //   languagess.add(lang as String);
+  // }
+
+  final String defaultLangCode = choosenLanguage == 'ar' ? 'ar' : 'en-US';
+  if (languageCodes.contains(defaultLangCode)) {
+    languageCode = defaultLangCode;
+  } else {
+    languageCode = defaultLanguage;
+  }
+  language = await tts.getDisplayLanguageByCode(languageCode!);
+  print(
+      'data is defaultLangCode $defaultLangCode choosenLanguage $choosenLanguage');
+
+  print('data is language $language');
+
+  /// get voice
+  voice = await getVoiceByLang(languageCode!);
+}
+
+Future<String?> getVoiceByLang(String lang) async {
+  final List<String>? voices = await tts.getVoiceByLang(languageCode!);
+  if (voices != null && voices.isNotEmpty) {
+    return voices.first;
+  }
+  return null;
+}
+
+void speak(text) {
+  tts.setVolume(volume);
+  tts.setRate(rate);
+  if (languageCode != null) {
+    tts.setLanguage(languageCode!);
+  }
+  tts.setPitch(pitch);
+  tts.speak(text);
 }

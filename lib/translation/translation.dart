@@ -89,6 +89,7 @@ Map<String, dynamic> languages = {
     "text_convfee": "Fees",
     "text_totalfare": "Total Fare",
     "text_cash": "Cash",
+    "way_to_pay": "Paid",
     "text_trust_contact": "Trusted Contact",
     "text_trust_contact_3": "Set your emergency contacts",
     "text_trust_contact_4":
@@ -729,7 +730,8 @@ Map<String, dynamic> languages = {
     "text_cancelfee": "رسوم الإلغاء",
     "text_convfee": "الرسوم ",
     "text_totalfare": "إجمالي الأجرة",
-    "text_cash": "نقدي",
+    "text_cash": "كاش",
+    "way_to_pay": "تم الدفع ",
     "text_trust_contact": "اتصال موثوق به",
     "text_trust_contact_3": "اضبط جهات اتصال الطوارئ الخاصة بك",
     "text_trust_contact_4":
@@ -798,7 +800,7 @@ Map<String, dynamic> languages = {
     "text_upcoming": "قادمة",
     "text_completed": "إنتهت",
     "text_cancelled": "ملغاة",
-    "text_card": "بطاقة",
+    "text_card": " بالكارت البنكي ",
     "text_loadmore": "تحميل المزيد",
     "text_location": "تفاصيل الموقع",
     "text_assigned": "تم تحديدها",

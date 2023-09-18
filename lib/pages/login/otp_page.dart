@@ -294,7 +294,9 @@ class _OtpState extends State<Otp> {
                                         _loading = true;
                                         _error = '';
                                       });
+                                      //Edit to login
                                       //firebase code send false
+                                      // if (phoneAuthCheck != false) {
                                       if (phoneAuthCheck == false) {
                                         var verify = await verifyUser(phnumber);
 

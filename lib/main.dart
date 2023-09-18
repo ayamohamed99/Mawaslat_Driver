@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
 import 'package:tagyourtaxi_driver/functions/notifications.dart';
-
 import 'pages/loadingPage/loadingpage.dart';
 
 void main() async {
@@ -19,6 +18,9 @@ void main() async {
   initMessaging();
   await initialize();
   currentPositionUpdate();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+      initLanguages();
+    });
   runApp(const MyApp());
 }
 

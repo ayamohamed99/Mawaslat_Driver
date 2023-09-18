@@ -1,10 +1,14 @@
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
 import 'package:http/http.dart' as http;
+import 'package:text_to_speech/text_to_speech.dart';
+
+// import 'package:flutter_tts/flutter_tts.dart';
 
 // create an instance
 FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -31,10 +35,8 @@ var androidDetails = const AndroidNotificationDetails(
   priority: Priority.high,
   visibility: NotificationVisibility.private,
 );
-
 const iosDetails = DarwinNotificationDetails(
     presentAlert: true, presentBadge: true, presentSound: true);
-
 var generalNotificationDetails =
     NotificationDetails(android: androidDetails, iOS: iosDetails);
 
@@ -46,11 +48,12 @@ var iosInit = const DarwinInitializationSettings(
   defaultPresentSound: true,
 );
 var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
-
 Future<void> initMessaging() async {
   await fltNotification.initialize(initSetting);
 
   FirebaseMessaging.instance.getInitialMessage().then((message) {
+    // initTts();
+    print('Notification getInitialMessage data is ${message?.data['message']}');
     if (message?.data != null) {
       if (message?.data['push_type'] == 'general') {
         latestNotification = message?.data['message'];
@@ -62,6 +65,7 @@ Future<void> initMessaging() async {
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
+    print('Notification FirebaseMessaging data is ${message.data['message']}');
     if (notification != null) {
       if (message.data['push_type'].toString() == 'general') {
         latestNotification = message.data['message'];
@@ -82,6 +86,7 @@ Future<void> initMessaging() async {
       isGeneral = true;
       valueNotifierHome.incrementNotifier();
     }
+    print('Notification onMessageOpenedApp data is ${message.data['message']}');
   });
 }
 
@@ -152,6 +157,7 @@ Future<void> _showBigPictureNotificationURLGeneral(message) async {
 
 Future<void> _showGeneralNotification(message) async {
   latestNotification = message['message'];
+  print('Notification _showGeneralNotification data is ${message['message']}');
   const AndroidNotificationDetails androidNotificationDetails =
       AndroidNotificationDetails(
     'notification_1',
@@ -200,4 +206,7 @@ Future<void> _showRideNotification(message) async {
   await rideNotification.show(id++, message.title.toString(),
       message.body.toString(), notificationDetails);
   id = id++;
+  print(
+      'Notification _showRideNotification data is ${message.body.toString()}');
+  speak(message.body.toString());
 }

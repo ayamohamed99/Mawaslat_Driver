@@ -717,6 +717,8 @@ class _InvoiceState extends State<Invoice> {
                               //   )
                               : Button(
                                   onTap: () {
+                                    speak(
+                                        '${languages[choosenLanguage]['way_to_pay']} ${(driverReq['payment_opt'] == '1') ? languages[choosenLanguage]['text_cash'] : (driverReq['payment_opt'] == '2') ? languages[choosenLanguage]['text_wallet'] : languages[choosenLanguage]['text_card']}');
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

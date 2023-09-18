@@ -10,6 +10,7 @@ import 'package:tagyourtaxi_driver/pages/NavigatorPages/withdraw.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
 import 'package:tagyourtaxi_driver/pages/login/login.dart';
 import 'package:tagyourtaxi_driver/pages/noInternet/nointernet.dart';
+import 'package:tagyourtaxi_driver/pages/payment/payment_page.dart';
 import 'package:tagyourtaxi_driver/styles/styles.dart';
 import 'package:tagyourtaxi_driver/translation/translation.dart';
 import 'package:tagyourtaxi_driver/widgets/widgets.dart';
@@ -712,15 +713,28 @@ class _WalletPageState extends State<WalletPage> {
                                           ),
                                           Button(
                                             onTap: () async {
+                                                // print(addMoney);
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
                                               if (addMoney != 0 &&
                                                   addMoney != null) {
                                                 setState(() {
-                                                  _choosePayment = true;
+                                                  // _choosePayment = true;
                                                   _addPayment = false;
                                                 });
+                                                PaymentScreen.navigate(context,
+                                                    amount: (addMoney as int)
+                                                        .toDouble());
                                               }
+                                              // FocusManager.instance.primaryFocus
+                                              //     ?.unfocus();
+                                              // if (addMoney != 0 &&
+                                              //     addMoney != null) {
+                                              //   setState(() {
+                                              //     _choosePayment = true;
+                                              //     _addPayment = false;
+                                              //   });
+                                              // }
                                             },
                                             text: languages[choosenLanguage]
                                                 ['text_addmoney'],

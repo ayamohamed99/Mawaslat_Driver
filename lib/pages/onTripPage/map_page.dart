@@ -28,6 +28,7 @@ import 'package:tagyourtaxi_driver/pages/vehicleInformations/docs_onprocess.dart
 import 'package:tagyourtaxi_driver/styles/styles.dart';
 import 'package:tagyourtaxi_driver/translation/translation.dart';
 import 'package:tagyourtaxi_driver/widgets/widgets.dart';
+import 'package:text_to_speech/text_to_speech.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
 class Maps extends StatefulWidget {
@@ -115,9 +116,13 @@ class _MapsState extends State<Maps>
     getLocs();
     getonlineoffline();
     setValue('register', true);
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initLanguages();
+    });
     super.initState();
   }
+
+  // END
 
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
@@ -2013,6 +2018,19 @@ class _MapsState extends State<Maps>
                                                                 child: InkWell(
                                                                   onTap:
                                                                       () async {
+                                                                    // try speech text
+                                                                    speak(userDetails['active'] ==
+                                                                            true
+                                                                        ? languages[choosenLanguage]
+                                                                            [
+                                                                            'text_off_duty']
+                                                                        : languages[choosenLanguage]
+                                                                            [
+                                                                            'text_on_duty']);
+
+                                                                    // speak(
+                                                                    //     'ألغى العميل الرحلة ، من فضلك انتظﺭ رحلة أُخرى');
+
                                                                     // await getUserDetails();
                                                                     if (userDetails['vehicle_type_id'] !=
                                                                             null &&
@@ -3132,6 +3150,12 @@ class _MapsState extends State<Maps>
                                                                         Button(
                                                                             onTap:
                                                                                 () async {
+                                                                              speak((driverReq['is_driver_arrived'] == 0)
+                                                                                  ? languages[choosenLanguage]['text_arrived']
+                                                                                  : (driverReq['is_driver_arrived'] == 1 && driverReq['is_trip_start'] == 0)
+                                                                                      ? languages[choosenLanguage]['text_startride']
+                                                                                      : languages[choosenLanguage]['text_endtrip']);
+
                                                                               setState(() {
                                                                                 _isLoading = true;
                                                                               });
