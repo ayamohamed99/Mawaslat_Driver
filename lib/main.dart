@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
 import 'package:tagyourtaxi_driver/functions/notifications.dart';
+import 'package:tagyourtaxi_driver/pages/payment/paymob_man.dart';
 import 'pages/loadingPage/loadingpage.dart';
 
 void main() async {
@@ -13,6 +14,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
+  await PaymobMan.init();
 
   checkInternetConnection();
   initMessaging();

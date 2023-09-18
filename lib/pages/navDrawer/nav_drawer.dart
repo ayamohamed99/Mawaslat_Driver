@@ -15,6 +15,7 @@ import 'package:tagyourtaxi_driver/pages/login/login.dart';
 import 'package:tagyourtaxi_driver/pages/navDrawer/finances.dart';
 import 'package:tagyourtaxi_driver/pages/navDrawer/settings.dart';
 import 'package:tagyourtaxi_driver/pages/onTripPage/map_page.dart';
+import 'package:tagyourtaxi_driver/pages/payment/payment_page.dart';
 import 'package:tagyourtaxi_driver/styles/styles.dart';
 import 'package:tagyourtaxi_driver/translation/translation.dart';
 import 'package:tagyourtaxi_driver/widgets/widgets.dart';
@@ -370,6 +371,86 @@ class _NavDrawerState extends State<NavDrawer> {
                                       ],
                                     ),
                                   ),
+                                //wallet page
+                                if (userDetails[
+                                        'show_bank_info_feature_on_mobile_app'] ==
+                                    "1")
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const WalletPage()));
+                                    },
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.all(media.width * 0.025),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/walletIcon.png',
+                                            fit: BoxFit.contain,
+                                            width: media.width * 0.075,
+                                          ),
+                                          SizedBox(
+                                            width: media.width * 0.025,
+                                          ),
+                                          SizedBox(
+                                            width: media.width * 0.55,
+                                            child: Text(
+                                              languages[choosenLanguage]
+                                                  ['text_enable_wallet'],
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.tajawal(
+                                                  fontSize:
+                                                      media.width * sixteen,
+                                                  color: textColor),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                //mange card
+                                InkWell(
+                                  onTap: () {
+                                    PaymentScreen.navigate(
+                                      context,
+                                      amount: 1,
+                                      isManage: true,
+                                    );
+                                  },
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.all(media.width * 0.025),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/walletIcon.png',
+                                          fit: BoxFit.contain,
+                                          width: media.width * 0.075,
+                                        ),
+                                        SizedBox(
+                                          width: media.width * 0.025,
+                                        ),
+                                        SizedBox(
+                                          width: media.width * 0.55,
+                                          child: Text(
+                                            choosenLanguage == "en"
+                                                ? "Manage Cards"
+                                                : "ادارة البطاقات",
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.tajawal(
+                                                fontSize: media.width * sixteen,
+                                                color: textColor),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
                                 //history
                                 InkWell(
                                   onTap: () {
@@ -536,86 +617,6 @@ class _NavDrawerState extends State<NavDrawer> {
                                         ),
                                       )
                                     : Container(),
-
-                                //wallet page
-                                if (userDetails[
-                                        'show_bank_info_feature_on_mobile_app'] ==
-                                    "1")
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const WalletPage()));
-                                    },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.all(media.width * 0.025),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/walletIcon.png',
-                                            fit: BoxFit.contain,
-                                            width: media.width * 0.075,
-                                          ),
-                                          SizedBox(
-                                            width: media.width * 0.025,
-                                          ),
-                                          SizedBox(
-                                            width: media.width * 0.55,
-                                            child: Text(
-                                              languages[choosenLanguage]
-                                                  ['text_enable_wallet'],
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.tajawal(
-                                                  fontSize:
-                                                      media.width * sixteen,
-                                                  color: textColor),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                //mange card
-                                // InkWell(
-                                //   onTap: () {
-                                //     // PaymentScreen.navigate(
-                                //     //   context,
-                                //     //   amount: 1,
-                                //     //   isManage: true,
-                                //     // );
-                                //   },
-                                //   child: Container(
-                                //     padding:
-                                //         EdgeInsets.all(media.width * 0.025),
-                                //     child: Row(
-                                //       children: [
-                                //         Image.asset(
-                                //           'assets/images/walletIcon.png',
-                                //           fit: BoxFit.contain,
-                                //           width: media.width * 0.075,
-                                //         ),
-                                //         SizedBox(
-                                //           width: media.width * 0.025,
-                                //         ),
-                                //         SizedBox(
-                                //           width: media.width * 0.55,
-                                //           child: Text(
-                                //             choosenLanguage == "en"
-                                //                 ? "Manage Cards"
-                                //                 : "ادارة البطاقات",
-                                //             overflow: TextOverflow.ellipsis,
-                                //             style: GoogleFonts.tajawal(
-                                //                 fontSize: media.width * sixteen,
-                                //                 color: textColor),
-                                //           ),
-                                //         )
-                                //       ],
-                                //     ),
-                                //   ),
-                                // ),
 
                                 //faq
                                 InkWell(

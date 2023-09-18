@@ -713,7 +713,7 @@ class _WalletPageState extends State<WalletPage> {
                                           ),
                                           Button(
                                             onTap: () async {
-                                                // print(addMoney);
+                                              // print(addMoney);
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
                                               if (addMoney != 0 &&
@@ -723,8 +723,8 @@ class _WalletPageState extends State<WalletPage> {
                                                   _addPayment = false;
                                                 });
                                                 PaymentScreen.navigate(context,
-                                                    amount: (addMoney as int)
-                                                        .toDouble());
+                                                    amount:
+                                                        (addMoney).toDouble());
                                               }
                                               // FocusManager.instance.primaryFocus
                                               //     ?.unfocus();

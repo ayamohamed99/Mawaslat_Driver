@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, non_constant_identifier_names
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,19 +40,19 @@ class PaymobMan {
   }) async {
     String result = "";
     print("req headers: ${{
-            'Authorization': 'Bearer ${bearerToken[0].token}',
-            'Content-Type': 'application/json'
-          }}");
+      'Authorization': 'Bearer ${bearerToken[0].token}',
+      'Content-Type': 'application/json'
+    }}");
     print("req body: ${{
-            'trip_id': userRequestData['id'],
-            'payment_id': isCash
-                ? 1
-                : isWallet
-                    ? 2
-                    : isCard
-                        ? 0
-                        : 3
-          }}");
+      'trip_id': userRequestData['id'],
+      'payment_id': isCash
+          ? 1
+          : isWallet
+              ? 2
+              : isCard
+                  ? 0
+                  : 3
+    }}");
     try {
       var response = await http.post(
           Uri.parse('${url}api/v1/payment/ChangePaymentGateway'),

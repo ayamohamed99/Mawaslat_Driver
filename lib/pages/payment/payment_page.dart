@@ -57,8 +57,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   void initState() {
     super.initState();
-    // chooseAnother = true;
-    // isLoading = false;
+    print('data is ${widget.amount}');
     init();
   }
 
