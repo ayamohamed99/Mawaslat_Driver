@@ -8,6 +8,10 @@ import 'package:tagyourtaxi_driver/functions/functions.dart';
 import 'package:tagyourtaxi_driver/functions/notifications.dart';
 import 'package:tagyourtaxi_driver/pages/payment/paymob_man.dart';
 import 'pages/loadingPage/loadingpage.dart';
+import 'package:facebook_app_events/facebook_app_events.dart';
+
+
+final facebookAppEvents = FacebookAppEvents();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

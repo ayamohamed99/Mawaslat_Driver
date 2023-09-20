@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
+import 'package:tagyourtaxi_driver/main.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
 import 'package:tagyourtaxi_driver/pages/noInternet/nointernet.dart';
 import 'package:tagyourtaxi_driver/styles/styles.dart';
@@ -22,7 +23,7 @@ class GetStarted extends StatefulWidget {
 
 String name = ''; //name of user
 String email = ''; // email of user
-dynamic proImageFile1;
+dynamic proImageFile1 = null;
 
 class _GetStartedState extends State<GetStarted> {
   bool _loading = false;
@@ -88,6 +89,14 @@ class _GetStartedState extends State<GetStarted> {
 
   //navigate
   navigate() {
+   facebookAppEvents.setUserData(
+      email: email,
+      firstName: name.split(' ').length > 1 ? name.split(' ').first : name,
+      lastName:
+          name.split(' ').length > 1 ? name.split(' ').skip(1).join(' ') : null,
+      country: 'Egypt',
+    );
+
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const ServiceArea()));
   }
@@ -298,51 +307,61 @@ class _GetStartedState extends State<GetStarted> {
                           SizedBox(
                             height: media.height * 0.065,
                           ),
-                          (nameText.text.isNotEmpty &&
-                                  emailText.text.isNotEmpty)
-                              ? Container(
-                                  width: media.width * 1,
-                                  alignment: Alignment.center,
-                                  child: Button(
-                                      onTap: () async {
-                                        String pattern =
-                                            r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])*$";
-                                        RegExp regex = RegExp(pattern);
-                                        if (regex.hasMatch(emailText.text)) {
-                                          FocusManager.instance.primaryFocus
-                                              ?.unfocus();
+                          Container(
+                              width: media.width * 1,
+                              alignment: Alignment.center,
+                              child: Button(
+                                  color: nameText.text.isNotEmpty &&
+                                          emailText.text.isNotEmpty &&
+                                          proImageFile1 != null
+                                      ? Colors.red
+                                      : Colors.grey,
+                                  borcolor: nameText.text.isNotEmpty &&
+                                          emailText.text.isNotEmpty &&
+                                          proImageFile1 != null
+                                      ? Colors.red
+                                      : Colors.grey,
+                                  onTap: () async {
+                                    if (nameText.text.isNotEmpty &&
+                                        emailText.text.isNotEmpty &&
+                                        proImageFile1 != null) {
+                                      String pattern =
+                                          r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])*$";
+                                      RegExp regex = RegExp(pattern);
+                                      if (regex.hasMatch(emailText.text)) {
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                        setState(() {
+                                          verifyEmailError = '';
+                                          _loading = true;
+                                        });
+                                        var result = await validateEmail(email);
+                                        setState(() {
+                                          _loading = false;
+                                        });
+                                        if (result == 'success') {
                                           setState(() {
                                             verifyEmailError = '';
-                                            _loading = true;
                                           });
-                                          var result =
-                                              await validateEmail(email);
-                                          setState(() {
-                                            _loading = false;
-                                          });
-                                          if (result == 'success') {
-                                            setState(() {
-                                              verifyEmailError = '';
-                                            });
-                                            navigate();
-                                          } else {
-                                            setState(() {
-                                              verifyEmailError =
-                                                  result.toString();
-                                            });
-                                            debugPrint('failed');
-                                          }
+                                          navigate();
                                         } else {
                                           setState(() {
                                             verifyEmailError =
-                                                languages[choosenLanguage]
-                                                    ['text_email_validation'];
+                                                result.toString();
                                           });
+                                          debugPrint('failed');
                                         }
-                                      },
-                                      text: languages[choosenLanguage]
-                                          ['text_next']))
-                              : Container()
+                                      } else {
+                                        setState(() {
+                                          verifyEmailError =
+                                              languages[choosenLanguage]
+                                                  ['text_email_validation'];
+                                        });
+                                      }
+                                    }
+                                  },
+                                  text: languages[choosenLanguage]
+                                      ['text_next']))
                         ],
                       ),
                     )),

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tagyourtaxi_driver/main.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
 import 'package:tagyourtaxi_driver/pages/login/get_started.dart';
 import 'package:tagyourtaxi_driver/pages/login/login.dart';
@@ -57,6 +58,8 @@ class _OtpState extends State<Otp> {
 
 //navigate
   navigate(verify) {
+    facebookAppEvents.setUserID(FirebaseAuth.instance.currentUser!.uid);
+
     log('vvv: $verify');
     log('vvv: $userDetails');
     if (verify == true) {
@@ -295,11 +298,10 @@ class _OtpState extends State<Otp> {
                                         _error = '';
                                       });
                                       //Edit to login
-                                      //firebase code send false
+                                      // firebase code send false
                                       // if (phoneAuthCheck != false) {
                                       if (phoneAuthCheck == false) {
                                         var verify = await verifyUser(phnumber);
-
                                         navigate(verify);
                                       } else {
                                         // firebase code send true
