@@ -26,13 +26,16 @@ class _InvoiceState extends State<Invoice> {
     ispop = true;
     amount.text = driverReq['requestBill']['data']['total_amount'].toString();
 
+    print(
+        'print data ${driverReq['requestBill']['data']['total_amount'].toDouble()} pay ${amount.text.toDouble() - amountTOPay.toDouble()}');
     super.initState();
   }
 
   //paied cash
   TextEditingController amount = TextEditingController();
   // TextEditingController phonenumber = TextEditingController();
-  dynamic amountTOPay = driverReq['requestBill']['data']['total_amount'];
+  double amountTOPay =
+      driverReq['requestBill']['data']['total_amount'].toDouble();
   String dropdownValue = 'user';
   bool error = false;
   String errortext = '';
@@ -1020,27 +1023,10 @@ class _InvoiceState extends State<Invoice> {
                                                                 'text_fill_fileds'];
                                                           });
                                                         } else {
-                                                          var result = await sharewalletfun(
-                                                              amount: (amount
-                                                                          .text
-                                                                          .toDouble() -
-                                                                      amountTOPay
-                                                                          .toDouble())
-                                                                  .toString(),
-                                                              mobile: driverReq[
-                                                                              'userDetail']
-                                                                          [
-                                                                          'data']
-                                                                      ['mobile']
-                                                                  .toString()
-                                                                  .replaceAll(
-                                                                      '+20',
-                                                                      ''),
-                                                              role:
-                                                                  dropdownValue);
-                                                          if (result ==
-                                                              'success') {
-                                                            // navigate();
+                                                          if (amount.text
+                                                                      .toDouble() -
+                                                                  amountTOPay ==
+                                                              0) {
                                                             setState(() {
                                                               ispop = false;
                                                               dropdownValue =
@@ -1050,15 +1036,49 @@ class _InvoiceState extends State<Invoice> {
                                                               // phonenumber.text = '';
                                                               amount.text = '';
                                                             });
-                                                          } else if (result ==
-                                                              'logout') {
-                                                            navigateLogout();
                                                           } else {
-                                                            setState(() {
-                                                              error = true;
-                                                              errortext = result
-                                                                  .toString();
-                                                            });
+                                                          var result = await sharewalletfun(
+                                                                amount: (amount
+                                                                            .text
+                                                                            .toDouble() -
+                                                                        amountTOPay)
+                                                                    .toString(),
+                                                                mobile: driverReq['userDetail']
+                                                                            [
+                                                                            'data']
+                                                                        [
+                                                                        'mobile']
+                                                                    .toString()
+                                                                    .replaceAll(
+                                                                        '+20',
+                                                                        ''),
+                                                                role:
+                                                                    dropdownValue);
+                                                            if (result ==
+                                                                'success') {
+                                                              // navigate();
+                                                              setState(() {
+                                                                ispop = false;
+                                                                dropdownValue =
+                                                                    'user';
+                                                                error = false;
+                                                                errortext = '';
+                                                                // phonenumber.text = '';
+                                                                amount.text =
+                                                                    '';
+                                                              });
+                                                            } else if (result ==
+                                                                'logout') {
+                                                              navigateLogout();
+                                                            } else {
+                                                              setState(() {
+                                                                error = true;
+                                                                errortext = result
+                                                                    .toString();
+                                                                
+                                                              });
+                                                            }
+                                                            
                                                           }
                                                         }
                                                       },
