@@ -492,18 +492,18 @@ packages:
     dependency: "direct main"
     description:
       name: geolocator
-      sha256: "672ba7193539d9092fac6c92d17692df2294c60109929ecb255cd6e52825ec4d"
+      sha256: "5c23f3613f50586c0bbb2b8f970240ae66b3bd992088cf60dd5ee2e6f7dde3a8"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.1"
+    version: "9.0.2"
   geolocator_android:
     dependency: transitive
     description:
       name: geolocator_android
-      sha256: "977d7b47150b331dad7d7c645b83e9fc52ecfd0436afb27fbf9cbee6dcd4075e"
+      sha256: db75aacf93fcdc2c0ba20066019da30e3fde7b102cf579d4bd4ea542e8a8cf17
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.4"
   geolocator_apple:
     dependency: transitive
     description:

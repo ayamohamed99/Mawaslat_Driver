@@ -42,7 +42,7 @@ dependencies:
   shared_preferences: ^2.0.12
   image_picker: ^0.8.4+4
   google_maps_flutter: ^2.1.1
-  geolocator: ^9.0.1
+  geolocator: ^9.0.2
   location: ^5.0.3
   audioplayers: ^0.20.1
   url_launcher: ^6.0.18
