@@ -160,6 +160,7 @@ class _MapsState extends State<Maps>
     }
   }
 
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -182,6 +183,7 @@ class _MapsState extends State<Maps>
         state == AppLifecycleState.inactive) {
       isBackground = true;
     }
+   
   }
 
   @override
@@ -403,7 +405,8 @@ class _MapsState extends State<Maps>
       audioSource: theSource,
     )
         .then((value) {
-      setState(() {});
+      setState(() {
+      });
     });
   }
 
@@ -445,7 +448,6 @@ class _MapsState extends State<Maps>
     if (!mRecorderIsInited || !mPlayer!.isStopped) {
       return null;
     }
-    speak(languages[choosenLanguage]['text_recording_on']);
     return mRecorder!.isStopped ? record : stopRecorder;
   }
 
@@ -2365,7 +2367,9 @@ class _MapsState extends State<Maps>
                                                                       ),
                                                                     ),
                                                                   ),
-
+                                                                const SizedBox(
+                                                                  height: 20,
+                                                                ),
                                                                 (driverReq.isNotEmpty &&
                                                                         driverReq['is_trip_start'] ==
                                                                             1)
@@ -4798,55 +4802,61 @@ class _MapsState extends State<Maps>
                                                           ),
                                                         ),
                                                         InkWell(
-                                                          onTap:
-                                                              getRecorderFn(),
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .all(media
-                                                                        .width *
-                                                                    0.05),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      !mRecorder!
+                                                          onTap: (){
+                                                                  speak(languages[choosenLanguage]['text_recording_on']);
+
+                                                          },
+                                                          child: InkWell(
+                                                            onTap:
+                                                                getRecorderFn(),
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .all(media
+                                                                          .width *
+                                                                      0.05),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        !mRecorder!
+                                                                                .isRecording
+                                                                            ? languages[choosenLanguage]
+                                                                                [
+                                                                                'text_recording']
+                                                                            : languages[choosenLanguage]
+                                                                                [
+                                                                                'text_end_recording'],
+                                                                        style: GoogleFonts.roboto(
+                                                                            fontSize: media.width *
+                                                                                sixteen,
+                                                                            color: mRecorder!.isRecording
+                                                                                ? buttonColor
+                                                                                : textColor,
+                                                                            fontWeight:
+                                                                                FontWeight.w600),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Icon(
+                                                                      mRecorder!
                                                                               .isRecording
-                                                                          ? languages[choosenLanguage]
-                                                                              [
-                                                                              'text_recording']
-                                                                          : languages[choosenLanguage]
-                                                                              [
-                                                                              'text_end_recording'],
-                                                                      style: GoogleFonts.roboto(
-                                                                          fontSize: media.width *
-                                                                              sixteen,
-                                                                          color: mRecorder!.isRecording
-                                                                              ? buttonColor
-                                                                              : textColor,
-                                                                          fontWeight:
-                                                                              FontWeight.w600),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Icon(
-                                                                    mRecorder!
-                                                                            .isRecording
-                                                                        ? Icons
-                                                                            .mic_none
-                                                                        : Icons
-                                                                            .mic_off_rounded,
-                                                                    color: mRecorder!
-                                                                            .isRecording
-                                                                        ? buttonColor
-                                                                        : textColor)
-                                                              ],
+                                                                          ? Icons
+                                                                              .mic_none
+                                                                          : Icons
+                                                                              .mic_off_rounded,
+                                                                      color: mRecorder!
+                                                                              .isRecording
+                                                                          ? buttonColor
+                                                                          : textColor)
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),

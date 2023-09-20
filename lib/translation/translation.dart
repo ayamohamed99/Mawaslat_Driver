@@ -2,6 +2,8 @@ Map<String, dynamic> languages = {
   "en": {
     "text_settings": "Settings",
     "text_skip": "Skip",
+    "text_recording": "Recording ",
+    "text_end_recording": "End Recording ",
     "text_finance": "Finances",
     "text_next": "Next",
     "text_login": "Login",
@@ -315,7 +317,7 @@ Map<String, dynamic> languages = {
     "text_myroute_warning":
         "Your current location should not be less than 5km from your home address",
     "text_off_duty": "OFF DUTY",
-    "text_recording_on":"SOS is on now and recording has been started",
+    "text_recording_on": "SOS is on now and recording has been started",
     "text_on_duty": "ON DUTY",
     "text_goto_url": "Goto URL",
     "text_select_date": "Select Date",
@@ -646,6 +648,8 @@ Map<String, dynamic> languages = {
   "ar": {
     "text_settings": "الإعدادات",
     "text_skip": "تخطي",
+    "text_end_recording": "انهاء التسجيل",
+    "text_recording": "تسجيل صوتي",
     "text_next": "التالي",
     "text_login": "تسجيل الدخول",
     "text_phone_number": "رقم التليفون",
