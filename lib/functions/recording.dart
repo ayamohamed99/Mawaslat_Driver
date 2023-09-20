@@ -1,4 +1,6 @@
 //recording 
+// ignore_for_file: depend_on_referenced_packages, camel_case_types
+
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_sound/flutter_sound.dart';

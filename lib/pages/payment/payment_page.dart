@@ -57,7 +57,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   void initState() {
     super.initState();
-    print('data is ${widget.amount}');
     init();
   }
 
@@ -433,12 +432,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
 //                                           );
 //                                         });}
   Widget chooseAnotherPayment(Size media) {
-    // TODO (abdelaziz): Custom to show pay cash or wallet
     return Column(
       children: [
         InkWell(
           onTap: () async {
-            print("pay cash");
 
             final result = await PaymobMan.payWithOtherOption(isCash: true);
             if (result == 'success') {

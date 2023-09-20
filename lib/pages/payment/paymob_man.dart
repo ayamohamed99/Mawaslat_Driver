@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,20 +41,6 @@ class PaymobMan {
     bool isCard = false,
   }) async {
     String result = "";
-    print("req headers: ${{
-      'Authorization': 'Bearer ${bearerToken[0].token}',
-      'Content-Type': 'application/json'
-    }}");
-    print("req body: ${{
-      'trip_id': userRequestData['id'],
-      'payment_id': isCash
-          ? 1
-          : isWallet
-              ? 2
-              : isCard
-                  ? 0
-                  : 3
-    }}");
     try {
       var response = await http.post(
           Uri.parse('${url}api/v1/payment/ChangePaymentGateway'),
@@ -76,7 +64,6 @@ class PaymobMan {
         result = 'logout';
       } else {
         debugPrint(response.body);
-        print(jsonDecode(response.body));
         result = 'failure';
       }
     } catch (e) {
@@ -85,7 +72,6 @@ class PaymobMan {
         result = 'no internet';
       }
     }
-    print("result: $result");
     return result;
   }
 

@@ -1526,7 +1526,8 @@ currentPositionUpdate() async {
       } else if (serviceEnabled == false && userDetails['active'] == true) {
         await driverStatus();
         await geolocs.Geolocator.getCurrentPosition(
-            desiredAccuracy: geolocs.LocationAccuracy.low);
+            desiredAccuracy: geolocs.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),
+);
         // await location.requestService();
       }
       if (userDetails['role'] == 'driver') {
@@ -4255,7 +4256,6 @@ Future<void> initLanguages() async {
   //   defaultLanguage = choosenLanguage == 'ar' ? 'ar' : 'en-US';
   // });
   languageCodes = await tts.getLanguages();
-  print('data is languageCodes $languageCodes');
 
   /// populate displayed language (i.e. English)
   final List<String>? displayLanguages = await tts.getDisplayLanguages();
@@ -4275,10 +4275,7 @@ Future<void> initLanguages() async {
     languageCode = defaultLanguage;
   }
   language = await tts.getDisplayLanguageByCode(languageCode!);
-  print(
-      'data is defaultLangCode $defaultLangCode choosenLanguage $choosenLanguage');
 
-  print('data is language $language');
 
   /// get voice
   voice = await getVoiceByLang(languageCode!);

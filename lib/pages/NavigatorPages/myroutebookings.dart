@@ -689,7 +689,8 @@ class _ChooseHomeAddressState extends State<ChooseHomeAddress> {
                                 } else {
                                   await geolocs.Geolocator.getCurrentPosition(
                                       desiredAccuracy:
-                                          geolocs.LocationAccuracy.low);
+                                          geolocs.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),
+);
                                   // await location.requestService();
                                   if (await geolocs.GeolocatorPlatform.instance
                                       .isLocationServiceEnabled()) {

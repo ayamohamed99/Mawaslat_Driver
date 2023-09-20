@@ -26,8 +26,6 @@ class _InvoiceState extends State<Invoice> {
     ispop = true;
     amount.text = driverReq['requestBill']['data']['total_amount'].toString();
 
-    print(
-        'print data ${driverReq['requestBill']['data']} data amount ${driverReq['request_eta_amount']}');
     super.initState();
   }
 
@@ -39,7 +37,6 @@ class _InvoiceState extends State<Invoice> {
   bool error = false;
   String errortext = '';
   bool ispop = false;
-  bool _isLoading = false;
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = const [
@@ -1003,7 +1000,6 @@ class _InvoiceState extends State<Invoice> {
                                                           media.width * 0.09,
                                                       onTap: () async {
                                                         setState(() {
-                                                          _isLoading = true;
                                                         });
                                                         if (driverReq['userDetail']
                                                                             [
@@ -1022,7 +1018,6 @@ class _InvoiceState extends State<Invoice> {
                                                                     choosenLanguage]
                                                                 [
                                                                 'text_fill_fileds'];
-                                                            _isLoading = false;
                                                           });
                                                         } else {
                                                           var result = await sharewalletfun(
@@ -1063,8 +1058,6 @@ class _InvoiceState extends State<Invoice> {
                                                               error = true;
                                                               errortext = result
                                                                   .toString();
-                                                              _isLoading =
-                                                                  false;
                                                             });
                                                           }
                                                         }

@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:tagyourtaxi_driver/functions/recording.dart';
 import 'package:tagyourtaxi_driver/pages/language/languages.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
@@ -19,9 +20,9 @@ import 'package:tagyourtaxi_driver/pages/vehicleInformations/docs_onprocess.dart
 import 'package:tagyourtaxi_driver/pages/vehicleInformations/upload_docs.dart';
 import 'package:tagyourtaxi_driver/translation/translation.dart';
 import 'package:tagyourtaxi_driver/widgets/widgets.dart';
-
 import '../../functions/functions.dart';
 import '../../styles/styles.dart';
+import 'package:permission_handler/permission_handler.dart' as pre;
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -79,6 +80,7 @@ class _LoadingPageState extends State<LoadingPage> {
         mRecorderIsInited = true;
       });
     });
+
     super.initState();
   }
 
@@ -113,7 +115,9 @@ class _LoadingPageState extends State<LoadingPage> {
             center = LatLng(locs.latitude, locs.longitude);
           } else {
             var loc = await geolocator.Geolocator.getCurrentPosition(
-                desiredAccuracy: geolocator.LocationAccuracy.low);
+              desiredAccuracy: geolocator.LocationAccuracy.low,
+              timeLimit: const Duration(seconds: 20),
+            );
             center = LatLng(double.parse(loc.latitude.toString()),
                 double.parse(loc.longitude.toString()));
           }
@@ -200,7 +204,9 @@ class _LoadingPageState extends State<LoadingPage> {
     if (serviceEnabled == false) {
       // await location.requestService();
       await geolocator.Geolocator.getCurrentPosition(
-          desiredAccuracy: geolocator.LocationAccuracy.low);
+        desiredAccuracy: geolocator.LocationAccuracy.low,
+        timeLimit: const Duration(seconds: 20),
+      );
     }
     if (await geolocator.GeolocatorPlatform.instance
         .isLocationServiceEnabled()) {

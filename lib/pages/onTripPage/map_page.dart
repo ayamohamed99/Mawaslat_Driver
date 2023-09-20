@@ -29,7 +29,6 @@ import 'package:tagyourtaxi_driver/pages/vehicleInformations/docs_onprocess.dart
 import 'package:tagyourtaxi_driver/styles/styles.dart';
 import 'package:tagyourtaxi_driver/translation/translation.dart';
 import 'package:tagyourtaxi_driver/widgets/widgets.dart';
-import 'package:text_to_speech/text_to_speech.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
 class Maps extends StatefulWidget {
@@ -283,7 +282,8 @@ class _MapsState extends State<Maps>
             heading = locs.heading;
           } else {
             loc = await geolocator.Geolocator.getCurrentPosition(
-                desiredAccuracy: geolocator.LocationAccuracy.low);
+                desiredAccuracy: geolocator.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),
+);
             center = LatLng(double.parse(loc.latitude.toString()),
                 double.parse(loc.longitude.toString()));
             heading = loc.heading;
@@ -339,7 +339,7 @@ class _MapsState extends State<Maps>
     if (serviceEnabled == false) {
       // await location.requestService();
       await geolocator.Geolocator.getCurrentPosition(
-          desiredAccuracy: geolocator.LocationAccuracy.low);
+          desiredAccuracy: geolocator.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),);
     }
     if (await geolocator.GeolocatorPlatform.instance
         .isLocationServiceEnabled()) {
@@ -2129,7 +2129,7 @@ class _MapsState extends State<Maps>
                                                                               false) {
                                                                         await geolocator.Geolocator.getCurrentPosition(
                                                                             desiredAccuracy:
-                                                                                geolocator.LocationAccuracy.low);
+                                                                                geolocator.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),);
                                                                         // await location
                                                                         //     .requestService();
                                                                         if (await geolocator
@@ -2168,7 +2168,7 @@ class _MapsState extends State<Maps>
                                                                           });
                                                                         } else {
                                                                           await geolocator.Geolocator.getCurrentPosition(
-                                                                              desiredAccuracy: geolocator.LocationAccuracy.low);
+                                                                              desiredAccuracy: geolocator.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),);
                                                                           // await location
                                                                           //     .requestService();
                                                                           setState(
@@ -2495,7 +2495,7 @@ class _MapsState extends State<Maps>
                                                                                 _locationDenied = true;
                                                                               });
                                                                             } else {
-                                                                              await geolocator.Geolocator.getCurrentPosition(desiredAccuracy: geolocator.LocationAccuracy.low);
+                                                                              await geolocator.Geolocator.getCurrentPosition(desiredAccuracy: geolocator.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),);
                                                                               // await location
                                                                               //     .requestService();
 

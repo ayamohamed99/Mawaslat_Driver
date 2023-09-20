@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_init_to_null
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';

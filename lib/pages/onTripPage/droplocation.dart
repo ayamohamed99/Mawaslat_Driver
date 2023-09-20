@@ -120,7 +120,8 @@ class _DropLocationState extends State<DropLocation>
         });
       } else {
         var loc = await geolocs.Geolocator.getCurrentPosition(
-            desiredAccuracy: geolocs.LocationAccuracy.low);
+            desiredAccuracy: geolocs.LocationAccuracy.low,timeLimit: const Duration(seconds: 20),
+);
         setState(() {
           _center = LatLng(double.parse(loc.latitude.toString()),
               double.parse(loc.longitude.toString()));

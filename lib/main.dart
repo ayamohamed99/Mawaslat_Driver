@@ -10,7 +10,6 @@ import 'package:tagyourtaxi_driver/pages/payment/paymob_man.dart';
 import 'pages/loadingPage/loadingpage.dart';
 import 'package:facebook_app_events/facebook_app_events.dart';
 
-
 final facebookAppEvents = FacebookAppEvents();
 
 void main() async {
@@ -19,14 +18,13 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
   await PaymobMan.init();
-
   checkInternetConnection();
   initMessaging();
   await initialize();
   currentPositionUpdate();
   WidgetsBinding.instance.addPostFrameCallback((_) {
-      initLanguages();
-    });
+    initLanguages();
+  });
   runApp(const MyApp());
 }
 
