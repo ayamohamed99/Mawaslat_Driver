@@ -648,6 +648,17 @@ PODS:
     - ReachabilitySwift
   - contacts_service (0.2.2):
     - Flutter
+  - facebook_app_events (0.0.1):
+    - FBAudienceNetwork (~> 6.12)
+    - FBSDKCoreKit (~> 16.0)
+    - Flutter
+  - FBAEMKit (16.1.3):
+    - FBSDKCoreKit_Basics (= 16.1.3)
+  - FBAudienceNetwork (6.14.0)
+  - FBSDKCoreKit (16.1.3):
+    - FBAEMKit (= 16.1.3)
+    - FBSDKCoreKit_Basics (= 16.1.3)
+  - FBSDKCoreKit_Basics (16.1.3)
   - Firebase/Analytics (10.12.0):
     - Firebase/Core
   - Firebase/Auth (10.12.0):
@@ -940,6 +951,7 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - contacts_service (from `.symlinks/plugins/contacts_service/ios`)
+  - facebook_app_events (from `.symlinks/plugins/facebook_app_events/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -969,6 +981,10 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - FBAEMKit
+    - FBAudienceNetwork
+    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
@@ -1010,6 +1026,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   contacts_service:
     :path: ".symlinks/plugins/contacts_service/ios"
+  facebook_app_events:
+    :path: ".symlinks/plugins/facebook_app_events/ios"
   firebase_analytics:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_auth:
@@ -1067,6 +1085,11 @@ SPEC CHECKSUMS:
   cloud_firestore: 005e157ad342dbfb2e461cb111a9020aa71bfb22
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   contacts_service: 849e1f84281804c8bfbec1b4c3eedcb23c5d3eca
+  facebook_app_events: deb163f1f7fa13213192532bbc84ff0b0d798bc2
+  FBAEMKit: af2972f39bb0f3f7c45998f435b007833c32ffb2
+  FBAudienceNetwork: 4d6223a9a88a22e9dca8c9e6c1829a8745b86228
+  FBSDKCoreKit: 19e2e18b3be578d7a51fed8fdd8c152bef0b9511
+  FBSDKCoreKit_Basics: dd9826ce3c9fd9f8cdf8dbbd0ef0a53e6c0c9e7e
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
   firebase_analytics: 3ff822ee2e90f95b61f0da300df20b378d380fbb
   firebase_auth: fbd28f8196214e596e77b99650bb2dc99e41eedb
