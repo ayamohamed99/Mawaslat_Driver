@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
+import 'package:tagyourtaxi_driver/main.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
 import 'package:tagyourtaxi_driver/pages/noInternet/nointernet.dart';
 import 'package:tagyourtaxi_driver/styles/styles.dart';
@@ -88,6 +89,14 @@ class _GetStartedState extends State<GetStarted> {
 
   //navigate
   navigate() {
+   facebookAppEvents.setUserData(
+      email: email,
+      firstName: name.split(' ').length > 1 ? name.split(' ').first : name,
+      lastName:
+          name.split(' ').length > 1 ? name.split(' ').skip(1).join(' ') : null,
+      country: 'Egypt',
+    );
+
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const ServiceArea()));
   }

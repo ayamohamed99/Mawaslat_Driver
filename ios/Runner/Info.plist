@@ -39,6 +39,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>647226057356606</string>
+	<key>FacebookClientToken</key>
+	<string>44a6f8aa87e48467c2cbb5c22295ca88</string>
+	<key>FacebookDisplayName</key>
+	<string>Mwaslat Driver</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

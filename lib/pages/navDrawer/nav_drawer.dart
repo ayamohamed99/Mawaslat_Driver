@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:tagyourtaxi_driver/functions/functions.dart';
+import 'package:tagyourtaxi_driver/main.dart';
 import 'package:tagyourtaxi_driver/pages/NavigatorPages/about.dart';
 import 'package:tagyourtaxi_driver/pages/NavigatorPages/driverdetails.dart';
 import 'package:tagyourtaxi_driver/pages/NavigatorPages/editprofile.dart';
@@ -38,6 +40,20 @@ class _NavDrawerState extends State<NavDrawer> {
         context,
         MaterialPageRoute(builder: (context) => const Login()),
         (route) => false);
+  }
+
+  
+  @override
+  void initState() {
+    super.initState();
+
+    if (!getBoolAsync('userInfoAdded')) {
+      facebookAppEvents.setUserData(
+        email: userDetails['email'],
+        phone: userDetails['mobile'],
+      );
+      setValue('userInfoAdded', true);
+    }
   }
 
   @override
