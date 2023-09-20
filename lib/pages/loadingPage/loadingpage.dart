@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
+import 'package:tagyourtaxi_driver/functions/recording.dart';
 import 'package:tagyourtaxi_driver/pages/language/languages.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
 import 'package:tagyourtaxi_driver/pages/login/login.dart';
@@ -67,7 +68,17 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     getLanguageDone();
+    mPlayer!.openPlayer().then((value) {
+      setState(() {
+        mPlayerIsInited = true;
+      });
+    });
 
+    openTheRecorder().then((value) {
+      setState(() {
+        mRecorderIsInited = true;
+      });
+    });
     super.initState();
   }
 

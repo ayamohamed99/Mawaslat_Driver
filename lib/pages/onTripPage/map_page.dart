@@ -16,6 +16,7 @@ import 'package:permission_handler/permission_handler.dart' as perm;
 import 'package:tagyourtaxi_driver/functions/functions.dart';
 import 'package:tagyourtaxi_driver/functions/geohash.dart';
 import 'package:tagyourtaxi_driver/functions/notifications.dart';
+import 'package:tagyourtaxi_driver/functions/recording.dart';
 import 'package:tagyourtaxi_driver/pages/NavigatorPages/notification.dart';
 import 'package:tagyourtaxi_driver/pages/chatPage/chat_page.dart';
 import 'package:tagyourtaxi_driver/pages/loadingPage/loading.dart';
@@ -101,8 +102,6 @@ class _MapsState extends State<Maps>
   dynamic onridebikeicon;
   dynamic offlinebikeicon;
   dynamic onlinebikeicon;
-
- 
 
   final _mapMarkerSC = StreamController<List<Marker>>();
   StreamSink<List<Marker>> get _mapMarkerSink => _mapMarkerSC.sink;
@@ -393,6 +392,69 @@ class _MapsState extends State<Maps>
   int _bottom = 0;
 
   GeoHasher geo = GeoHasher();
+
+  //initState for recording
+
+  void record() {
+    mRecorder!
+        .startRecorder(
+      toFile: mPath,
+      codec: codec,
+      audioSource: theSource,
+    )
+        .then((value) {
+      setState(() {});
+    });
+  }
+
+  void stopRecorder() async {
+    await mRecorder!.stopRecorder().then((value) {
+      setState(() {
+        //var url = value;
+        mplaybackReady = true;
+      });
+    });
+  }
+
+  void play() {
+    assert(mPlayerIsInited &&
+        mplaybackReady &&
+        mRecorder!.isStopped &&
+        mPlayer!.isStopped);
+    mPlayer!
+        .startPlayer(
+            fromURI: mPath,
+            //codec: kIsWeb ? Codec.opusWebM : Codec.aacADTS,
+            whenFinished: () {
+              setState(() {});
+            })
+        .then((value) {
+      setState(() {});
+    });
+  }
+
+  void stopPlayer() {
+    mPlayer!.stopPlayer().then((value) {
+      setState(() {});
+    });
+  }
+
+// ----------------------------- UI --------------------------------------------
+
+  fn? getRecorderFn() {
+    if (!mRecorderIsInited || !mPlayer!.isStopped) {
+      return null;
+    }
+    speak(languages[choosenLanguage]['text_recording_on']);
+    return mRecorder!.isStopped ? record : stopRecorder;
+  }
+
+  fn? getPlaybackFn() {
+    if (!mPlayerIsInited || !mplaybackReady || !mRecorder!.isStopped) {
+      return null;
+    }
+    return mPlayer!.isStopped ? play : stopPlayer;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -2266,6 +2328,44 @@ class _MapsState extends State<Maps>
                                                                   CrossAxisAlignment
                                                                       .end,
                                                               children: [
+                                                                if (driverReq
+                                                                        .isNotEmpty &&
+                                                                    driverReq[
+                                                                            'is_trip_start'] ==
+                                                                        1)
+                                                                  InkWell(
+                                                                    // onTap: getRecorderFn(),
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          media.width *
+                                                                              0.1,
+                                                                      width: media
+                                                                              .width *
+                                                                          0.1,
+                                                                      decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                                blurRadius: 2,
+                                                                                color: Colors.red.withOpacity(0.2),
+                                                                                spreadRadius: 2)
+                                                                          ],
+                                                                          color: mRecorder!.isRecording
+                                                                              ? buttonColor
+                                                                              : page,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(media.width * 0.02)),
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .mic,
+                                                                        color: mRecorder!.isStopped
+                                                                            ? buttonColor
+                                                                            : Colors.white,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+
                                                                 (driverReq.isNotEmpty &&
                                                                         driverReq['is_trip_start'] ==
                                                                             1)
@@ -3357,7 +3457,6 @@ class _MapsState extends State<Maps>
                                                         //       )
                                                         //     : Container(),
 
-                                                    
                                                         //user cancelled request popup
                                                         (_reqCancelled == true)
                                                             ? Positioned(
@@ -4694,6 +4793,59 @@ class _MapsState extends State<Maps>
                                                                 ),
                                                                 const Icon(Icons
                                                                     .notification_add)
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap:
+                                                              getRecorderFn(),
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .all(media
+                                                                        .width *
+                                                                    0.05),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      !mRecorder!
+                                                                              .isRecording
+                                                                          ? languages[choosenLanguage]
+                                                                              [
+                                                                              'text_recording']
+                                                                          : languages[choosenLanguage]
+                                                                              [
+                                                                              'text_end_recording'],
+                                                                      style: GoogleFonts.roboto(
+                                                                          fontSize: media.width *
+                                                                              sixteen,
+                                                                          color: mRecorder!.isRecording
+                                                                              ? buttonColor
+                                                                              : textColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w600),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Icon(
+                                                                    mRecorder!
+                                                                            .isRecording
+                                                                        ? Icons
+                                                                            .mic_none
+                                                                        : Icons
+                                                                            .mic_off_rounded,
+                                                                    color: mRecorder!
+                                                                            .isRecording
+                                                                        ? buttonColor
+                                                                        : textColor)
                                                               ],
                                                             ),
                                                           ),

@@ -45,6 +45,7 @@ import '../pages/NavigatorPages/fleetdocuments.dart';
 import '../pages/login/ownerregister.dart';
 import 'geohash.dart';
 
+
 //languages code
 dynamic phcode;
 dynamic platform;
@@ -4300,3 +4301,4 @@ void speak(text) {
   tts.setPitch(pitch);
   tts.speak(text);
 }
+

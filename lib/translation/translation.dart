@@ -315,6 +315,7 @@ Map<String, dynamic> languages = {
     "text_myroute_warning":
         "Your current location should not be less than 5km from your home address",
     "text_off_duty": "OFF DUTY",
+    "text_recording_on":"SOS is on now and recording has been started",
     "text_on_duty": "ON DUTY",
     "text_goto_url": "Goto URL",
     "text_select_date": "Select Date",
@@ -957,6 +958,7 @@ Map<String, dynamic> languages = {
     "text_myroute_warning":
         "يجب ألا يقل موقعك الحالي عن 5 كيلومترات من عنوان منزلك",
     "text_off_duty": "خارج الخدمة",
+    "text_recording_on": "تم تفعيل خدمه الطوارئ و بداء عمليه التسجيل الصوتى",
     "text_on_duty": "في الخدمة",
     "text_goto_url": "الموقع الإلكتروني",
     "text_select_date": "حدد تاريخ",
