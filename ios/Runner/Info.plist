@@ -78,7 +78,11 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Program requires GPS to track cars and get ride</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow access to microphone</string>
+	<string>Allow application to access microphone</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>recognize speech</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Need location access for updating nearby driver</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to photo library to pick photos for updating documents and profile pictures</string>
 	<key>UIBackgroundModes</key>

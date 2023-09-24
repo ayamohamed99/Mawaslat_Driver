@@ -2087,17 +2087,17 @@ class _MapsState extends State<Maps>
                                                                   onTap:
                                                                       () async {
                                                                     // try speech text
-                                                                    speak(userDetails['active'] ==
-                                                                            true
-                                                                        ? languages[choosenLanguage]
-                                                                            [
-                                                                            'text_off_duty']
-                                                                        : languages[choosenLanguage]
-                                                                            [
-                                                                            'text_on_duty']);
+                                                                    // speak(userDetails['active'] ==
+                                                                    //         true
+                                                                    //     ? languages[choosenLanguage]
+                                                                    //         [
+                                                                    //         'text_off_duty']
+                                                                    //     : languages[choosenLanguage]
+                                                                    //         [
+                                                                    //         'text_on_duty']);
 
-                                                                    // speak(
-                                                                    //     'ألغى العميل الرحلة ، من فضلك انتظﺭ رحلة أُخرى');
+                                                                    speak(
+                                                                        'ألغى العميل الرحلة ، من فضلك انتظﺭ رحلة أُخرى');
 
                                                                     // await getUserDetails();
                                                                     if (userDetails['vehicle_type_id'] !=
